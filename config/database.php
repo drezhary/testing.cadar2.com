@@ -3,8 +3,7 @@ function connectDatabase()
 {
     $host = 'localhost'; // Ganti sesuai host Anda
     $dbname = 'cadh5373_ikatan_kematian_warga'; // Ganti sesuai nama database Anda
-    $username = '
-cadh5373_drezhary'; // Ganti sesuai username database Anda
+    $username = 'cadh5373_drezhary'; // Ganti sesuai username database Anda
     $password = 'D1ckyR3zh4ry'; // Ganti sesuai password database Anda
 
     try {
