@@ -1,6 +1,5 @@
 <?php
-require_once 'config/db_connection.php';
-
+require_once __DIR__ . '/../config/database.php';
 function getData($tableName)
 {
     $conn = connectDatabase();

@@ -1,6 +1,7 @@
 <?php
 require_once 'includes/functions.php';
 $data = getData('anggota_keluarga');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,64 +13,14 @@ $data = getData('anggota_keluarga');
     <!-- Bootstrap framework -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-        .hero {
-            position: relative;
-            background-size: cover;
-            background-position: center;
-            color: white;
-            height: 550px;
-            /* Tinggi hero, sesuaikan jika perlu */
-        }
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            /* Overlay gelap untuk meningkatkan keterbacaan */
-        }
-
-        .hero-title {
-            font-size: 2.5rem;
-            /* Ukuran font untuk judul */
-            margin: 0;
-            /* Menghapus margin default */
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            /* Ukuran font untuk subjudul */
-            margin: 10px 0;
-            /* Menambahkan margin antara judul dan subjudul */
-        }
-
-        @media (max-width: 576px) {
-            .hero {
-                height: 580px;
-                /* Tinggi lebih kecil untuk layar kecil */
-            }
-
-            .hero-title {
-                font-size: 1.75rem;
-                /* Ukuran font lebih kecil untuk layar kecil */
-            }
-
-            .hero-subtitle {
-                font-size: 1rem;
-                /* Ukuran font lebih kecil untuk layar kecil */
-            }
-        }
-    </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <?php include 'includes/header.php' ?>
 
-        <section class="hero d-flex align-items-center" style="background-image: url('assets/images/header-bg.jpg');">
+        <section class="p-5 text-center bg-image rounded-3" style="background-image: url('assets/images/logo-ikcd.png');">
             <div class="overlay"></div>
             <div class="container text-center">
                 <h1 class="hero-title">Selamat Datang di Website Resmi</h1>
@@ -110,7 +61,7 @@ $data = getData('anggota_keluarga');
                         var searchValue = $('#searchInput').val(); // Ambil nilai pencarian
 
                         $.ajax({
-                            url: 'ajax_handler.php', // Ganti dengan nama file PHP yang memproses pencarian
+                            url: 'includes/ajax_handler.php', // Ganti dengan nama file PHP yang memproses pencarian
                             method: 'GET',
                             data: {
                                 search: searchValue,
@@ -133,10 +84,10 @@ $data = getData('anggota_keluarga');
             </script>
         </section>
 
-        <section class="mt-4">
+        <!-- <section class="mt-4">
             <?php
             // admin_rejected.php
-            include '../ikatan_kematian_warga/pages/dashboard/includes/db.php';
+            // include 'config/database.php';
 
             // Ambil data warga yang ditolak dari tabel pending_warga
             $result = $conn->query("SELECT * FROM anggota_pending WHERE status_approve = 'Ditolak'");
@@ -168,7 +119,7 @@ $data = getData('anggota_keluarga');
                     <p>Tidak ada data warga yang ditolak.</p>
                 <?php endif; ?>
             </div>
-        </section>
+        </section> -->
         <!-- JS Bootstrap-->
         <script src="assets/js/bootstrap.min.js"></script>
     </div>

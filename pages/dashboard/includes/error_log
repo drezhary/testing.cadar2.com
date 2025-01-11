@@ -1,2 +1,0 @@
-[03-Dec-2024 15:47:33 Asia/Jakarta] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/cadh5373/public_html/pages/dashboard/includes/proses_login.php:17) in /home/cadh5373/public_html/pages/dashboard/includes/proses_login.php on line 41
-[03-Dec-2024 15:52:37 Asia/Jakarta] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/cadh5373/public_html/pages/dashboard/includes/proses_login.php:28) in /home/cadh5373/public_html/pages/dashboard/includes/proses_login.php on line 38
