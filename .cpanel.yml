@@ -1,0 +1,5 @@
+---
+deployment:
+tasks:
+- export DEPLOYPATH=/home/cadh5373/public_html/testing.cadar2.com/git
+- /bin/cp -r * $DEPLOYPATH
