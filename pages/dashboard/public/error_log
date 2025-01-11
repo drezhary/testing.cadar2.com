@@ -1,0 +1,43 @@
+[03-Dec-2024 15:36:32 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'cadh5373_drezhary'@'localhost' (using password: NO) in /home/cadh5373/public_html/pages/dashboard/includes/db.php:10
+Stack trace:
+#0 /home/cadh5373/public_html/pages/dashboard/includes/db.php(10): mysqli->__construct('localhost', 'cadh5373_drezha...', '', 'ikatan_kematian...')
+#1 /home/cadh5373/public_html/pages/dashboard/public/registrasi.php(3): include('/home/cadh5373/...')
+#2 {main}
+  thrown in /home/cadh5373/public_html/pages/dashboard/includes/db.php on line 10
+[03-Dec-2024 15:38:04 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'cadh5373_drezhary'@'localhost' (using password: NO) in /home/cadh5373/public_html/pages/dashboard/includes/db.php:10
+Stack trace:
+#0 /home/cadh5373/public_html/pages/dashboard/includes/db.php(10): mysqli->__construct('localhost', 'cadh5373_drezha...', '', 'ikatan_kematian...')
+#1 /home/cadh5373/public_html/pages/dashboard/public/registrasi.php(3): include('/home/cadh5373/...')
+#2 {main}
+  thrown in /home/cadh5373/public_html/pages/dashboard/includes/db.php on line 10
+[03-Dec-2024 15:38:05 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'cadh5373_drezhary'@'localhost' (using password: NO) in /home/cadh5373/public_html/pages/dashboard/includes/db.php:10
+Stack trace:
+#0 /home/cadh5373/public_html/pages/dashboard/includes/db.php(10): mysqli->__construct('localhost', 'cadh5373_drezha...', '', 'ikatan_kematian...')
+#1 /home/cadh5373/public_html/pages/dashboard/public/registrasi.php(3): include('/home/cadh5373/...')
+#2 {main}
+  thrown in /home/cadh5373/public_html/pages/dashboard/includes/db.php on line 10
+[03-Dec-2024 15:53:45 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'cadh5373_ikatan_kematian_warga.pending_warga' doesn't exist in /home/cadh5373/public_html/pages/dashboard/public/admin.php:6
+Stack trace:
+#0 /home/cadh5373/public_html/pages/dashboard/public/admin.php(6): mysqli->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/cadh5373/public_html/pages/dashboard/public/admin.php on line 6
+[03-Dec-2024 15:53:49 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'cadh5373_ikatan_kematian_warga.pending_warga' doesn't exist in /home/cadh5373/public_html/pages/dashboard/public/admin.php:6
+Stack trace:
+#0 /home/cadh5373/public_html/pages/dashboard/public/admin.php(6): mysqli->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/cadh5373/public_html/pages/dashboard/public/admin.php on line 6
+[03-Dec-2024 15:54:26 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'cadh5373_ikatan_kematian_warga.pending_warga' doesn't exist in /home/cadh5373/public_html/pages/dashboard/public/admin.php:6
+Stack trace:
+#0 /home/cadh5373/public_html/pages/dashboard/public/admin.php(6): mysqli->query('SELECT * FROM p...')
+#1 {main}
+  thrown in /home/cadh5373/public_html/pages/dashboard/public/admin.php on line 6
+[07-Dec-2024 17:33:02 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'cadh5373_ikatan_kematian_warga.pending_warga' doesn't exist in /home/cadh5373/public_html/pages/dashboard/public/registrasi.php:47
+Stack trace:
+#0 /home/cadh5373/public_html/pages/dashboard/public/registrasi.php(47): mysqli->prepare('INSERT INTO pen...')
+#1 {main}
+  thrown in /home/cadh5373/public_html/pages/dashboard/public/registrasi.php on line 47
+[07-Dec-2024 22:07:26 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'cadh5373_ikatan_kematian_warga.pending_warga' doesn't exist in /home/cadh5373/public_html/pages/dashboard/public/registrasi.php:47
+Stack trace:
+#0 /home/cadh5373/public_html/pages/dashboard/public/registrasi.php(47): mysqli->prepare('INSERT INTO pen...')
+#1 {main}
+  thrown in /home/cadh5373/public_html/pages/dashboard/public/registrasi.php on line 47
