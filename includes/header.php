@@ -16,10 +16,10 @@
                     <a class="nav-link" href="#">Proses Pengajuan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../ikatan_kematian_warga/pages/dashboard/public/login.php">Login</a>
+                    <a class="nav-link" href="../../ikatan_kematian_warga-1/pages/login.php">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../ikatan_kematian_warga/pages/dashboard/public/registrasi.php">Registrasi</a>
+                    <a class="nav-link" href="../../ikatan_kematian_warga-1/pages/registrasi.php">Registrasi</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../ikatan_kematian_warga/pages/dashboard/public/input_nik.html">Perbarui Data</a>
