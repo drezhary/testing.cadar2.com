@@ -1,10 +1,3 @@
-<?php
-session_start();
-if (isset($_SESSION['role'])) {
-    header('Location: index.php'); // Redirect ke dashboard jika sudah login
-    exit;
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +12,7 @@ if (isset($_SESSION['role'])) {
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
             <h4 class="text-center mb-4">Login</h4>
-            <form action="../includes/proses_login.php" method="POST">
+            <form action="../process/proses_login.php" method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username" required>
