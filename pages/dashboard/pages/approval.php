@@ -1,14 +1,15 @@
 <?php
 
-session_start();
-if (!isset($_SESSION['user'])) {
-    header('Location: login.php'); // Redirect ke login jika belum login
-    exit;
-}
-$user = $_SESSION['user'];
+// session_start();
+// if (!isset($_SESSION['user'])) {
+//     header('Location: login.php'); // Redirect ke login jika belum login
+//     exit;
+// }
+// $user = $_SESSION['user'];
 
 include '../../config/database.php'; // Include file koneksi database
-
+include '../../includes/sidebar.php';
+$conn = connectDatabase();
 // Ambil data warga dari tabel pending_warga yang statusnya Pending
 $result = $conn->query("SELECT * FROM anggota_pending WHERE status_approve = 'Pending'");
 
@@ -70,7 +71,9 @@ $result = $conn->query("SELECT * FROM anggota_pending WHERE status_approve = 'Pe
         <div class="container mt-5">
             <h2 class="mb-4">Approval Data Warga</h2>
 
-            <?php if ($result->num_rows > 0): ?>
+            <?php 
+            if ($result->rowCount() > 0):
+            ?>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -87,7 +90,7 @@ $result = $conn->query("SELECT * FROM anggota_pending WHERE status_approve = 'Pe
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($row = $result->fetch_assoc()): ?>
+                        <?php while ($row = $result->fetch(PDO::FETCH_ASSOC)): ?>
                             <tr>
                                 <td><?= $row['nik']; ?></td>
                                 <td><?= $row['nama']; ?></td>

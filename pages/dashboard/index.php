@@ -1,10 +1,10 @@
 <?php
-session_start();
-if (!isset($_SESSION['role'])) {
-    header('Location: /../login.php'); // Redirect ke login jika belum login
-    exit;
-}
-$user = $_SESSION['role'];
+// session_start();
+// if (!isset($_SESSION['role'])) {
+//     header('Location: /../login.php'); // Redirect ke login jika belum login
+//     exit;
+// }
+// $user = $_SESSION['role'];
 
 ?>
 <?php include '../../includes/sidebar.php'; ?>

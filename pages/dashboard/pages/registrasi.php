@@ -1,6 +1,9 @@
 <?php
 // index.php
-include '../config/database.php';
+include '../../config/database.php';
+include '../../includes/sidebar.php';
+
+$conn = connectDatabase();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nik = $_POST['nik'];
@@ -15,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tgl_lahir = $_POST['tgl_lahir'];
     $stats_dalam_keluarga = $_POST['stats_dalam_keluarga'];
     $status_menetap = $_POST['status_menetap'];
-    $keterangan_aktif = $_POST['keterangan_aktif'];
+    $keterangan_aktif = $_POST['keterangan_aktif'] ?? 'Tidak Aktif';
     $tanggal_pengajuan = date('Y-m-d H:i:s'); // Tanggal otomatis
     $foto_berkas = '';
 
@@ -43,47 +46,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     }
+
     // Siapkan query untuk insert data
-    $sql = "INSERT INTO anggota_pending (nik, no_kk, blok, no_rumah, rt, rw, nama, jenis_kelamin, tempat_lahir, tgl_lahir, stats_dalam_keluarga, status_menetap, keterangan_aktif, foto_berkas, tanggal_pengajuan, status_approve)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending')";
+    $sql = "INSERT INTO anggota_pending 
+        (nik, no_kk, blok, no_rumah, rt, rw, nama, jenis_kelamin, tempat_lahir, tgl_lahir, stats_dalam_keluarga, status_menetap, keterangan_aktif, foto_berkas, tanggal_pengajuan, status_approve) 
+        VALUES 
+        (:nik, :no_kk, :blok, :no_rumah, :rt, :rw, :nama, :jenis_kelamin, :tempat_lahir, :tgl_lahir, :stats_dalam_keluarga, :status_menetap, :keterangan_aktif, :foto_berkas, :tanggal_pengajuan, 'Pending')";
+    
     // Siapkan statement
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
-        die("Kesalahan query: " . $conn->error);
+        die("Kesalahan query: " . $conn->errorInfo());
     }
-    // Bind parameter
-    $stmt->bind_param(
-        "sssssssssssssss",
-        $nik,
-        $no_kk,
-        $blok,
-        $no_rumah,
-        $rt,
-        $rw,
-        $nama,
-        $jenis_kelamin,
-        $tempat_lahir,
-        $tgl_lahir,
-        $stats_dalam_keluarga,
-        $status_menetap,
-        $keterangan_aktif,
-        $foto_berkas,
-        $tanggal_pengajuan
-    );
+
+    // Bind parameter dan eksekusi query
+    $stmt->execute([
+        ':nik' => $nik,
+        ':no_kk' => $no_kk,
+        ':blok' => $blok,
+        ':no_rumah' => $no_rumah,
+        ':rt' => $rt,
+        ':rw' => $rw,
+        ':nama' => $nama,
+        ':jenis_kelamin' => $jenis_kelamin,
+        ':tempat_lahir' => $tempat_lahir,
+        ':tgl_lahir' => $tgl_lahir,
+        ':stats_dalam_keluarga' => $stats_dalam_keluarga,
+        ':status_menetap' => $status_menetap,
+        ':keterangan_aktif' => $keterangan_aktif,
+        ':foto_berkas' => $foto_berkas,
+        ':tanggal_pengajuan' => $tanggal_pengajuan
+    ]);
 
     // Eksekusi query
-    if ($stmt->execute()) {
+    if ($stmt->rowCount() > 0) {
         // Jika berhasil, redirect ke halaman sukses
         header("Location: sukses.php?message=Data berhasil disimpan!");
         exit;
     } else {
         // Jika gagal, tampilkan pesan error
-        echo "Gagal menyimpan data: " . $stmt->error;
+        echo "Gagal menyimpan data: ";
     }
 
     // Tutup statement dan koneksi
-    $stmt->close();
-    $conn->close();
+    $stmt->closeCursor();
+    $conn = null;
+    exit;
 }
 ?>
 
@@ -93,13 +101,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Registrasi (Dua Kolom)</title>
-    <!-- Bootstrap CSS -->
+    <title>Registrasi Data Baru</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Sidebar styling */
+        #sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            left: 0;
+            transition: all 0.3s;
+        }
+
+        #main-content {
+            margin-left: 250px;
+            transition: all 0.3s;
+        }
+
+        /* Sidebar collapse for smaller screens */
+        #sidebar.collapsed {
+            transform: translateX(-250px);
+        }
+
+        #main-content.collapsed {
+            margin-left: 0;
+        }
+
+        #sidebarToggle {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1030;
+        }
+
+        @media (min-width: 768px) {
+            #sidebarToggle {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container mt-5">
+    <!-- Sidebar (included from external HTML) -->
+    <div id="sidebar-container"></div>
+    <!-- Toggle Button -->
+    <button id="sidebarToggle" class="btn btn-primary">Toggle Sidebar</button>
+
+    <div id="main-content" class="p-4">
+        <div class="container mt-5">
+            <h2 class="mb-4">Registrasi Warga Baru</h2>
+
+            <div class="container mt-5">
         <h2 class="text-center mb-4">Form Registrasi Anggota</h2>
         <form action="registrasi.php" method="POST" enctype="multipart/form-data">
             <div class="row">
@@ -214,12 +267,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary mt-3">Daftar</button>
                 <button type="reset" class="btn btn-secondary">Reset</button>
-                <a href="../../../index.php" class="btn btn-primary">Kembali ke Halaman Depan</a>
             </div>
         </form>
     </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../includes/main.js"></script>
 </body>
-
 </html>
