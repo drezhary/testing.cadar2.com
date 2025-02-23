@@ -104,8 +104,34 @@ $result = $conn->query("SELECT * FROM anggota_pending WHERE status_approve = 'Pe
                                     <img src="../uploads/<?= $row['foto_berkas']; ?>" alt="Berkas" width="100">
                                 </td>
                                 <td>
-                                    <a href="includes/approve.php?id=<?= $row['id']; ?>" class="btn btn-success btn-sm">Approve</a>
+                                    <a href="#" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#approveModal<?= $row['id']; ?>">Approve</a>
                                     <a href="../includes/reject.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#rejectModal<?= $row['id']; ?>">Reject</a>
+                                   
+                                    <!-- Modal Pop-up untuk input kode registrasi -->
+                                    <div class="modal fade" id="approveModal<?= $row['id']; ?>" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="approveModalLabel">Input Nomor Registrasi</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form action="includes/approve.php?id=<?= $row['id']; ?>" method="POST">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label for="kode_registrasi" class="form-label">Nomor Registrasi:</label>
+                                                            <input type="text" name="kode_registrasi" id="kode_registrasi" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-success">Approve</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Batas pop up approve -->
+
                                     <!-- Modal Pop-up untuk mengisi alasan reject -->
                                     <div class="modal fade" id="rejectModal<?= $row['id']; ?>" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -129,6 +155,7 @@ $result = $conn->query("SELECT * FROM anggota_pending WHERE status_approve = 'Pe
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- Batas pop up reject -->
                                 </td>
                             </tr>
                         <?php endwhile; ?>
