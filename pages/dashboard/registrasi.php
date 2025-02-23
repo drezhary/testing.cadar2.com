@@ -7,6 +7,9 @@ require_once '../../config/config.php';
 $conn = connectDatabase();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    echo "<pre>";
+print_r($_POST);
+echo "</pre>";
     $nik = $_POST['nik'];
     $no_kk = $_POST['no_kk'];
     $blok = $_POST['blok'];
