@@ -5,6 +5,7 @@ $conn = connectDatabase(); // Pastikan fungsi ini mengembalikan objek PDO
 
 $id = $_GET['id'];
 
+
 try {
     // Mulai transaksi
     $conn->beginTransaction();
@@ -14,14 +15,22 @@ try {
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Pastikan kita mendapatkan no_reg dari form
+$no_reg = isset($_POST['no_reg']) ? $_POST['no_reg'] : null;
+
+if (!$no_reg) {
+    echo "Error: Nomor Registrasi tidak boleh kosong!";
+    exit;
+}
 
     if ($row) {
         // Ubah nilai keterangan_aktif menjadi 'Aktif'
         $row['keterangan_aktif'] = 'Aktif';
         // Masukkan data ke tabel anggota
-        $stmt_insert = $conn->prepare("INSERT INTO anggota (nik, no_kk, blok, no_rumah, rt, rw, tgl_lahir, tempat_lahir, jenis_kelamin, nama, status_menetap, stats_dalam_keluarga, keterangan_aktif, foto_berkas) 
-                                        VALUES (:nik, :no_kk, :blok, :no_rumah, :rt, :rw, :tgl_lahir, :tempat_lahir, :jenis_kelamin, :nama, :status_menetap, :stats_dalam_keluarga, :keterangan_aktif, :foto_berkas)");
+        $stmt_insert = $conn->prepare("INSERT INTO anggota (no_reg, nik, no_kk, blok, no_rumah, rt, rw, tgl_lahir, tempat_lahir, jenis_kelamin, nama, status_menetap, stats_dalam_keluarga, keterangan_aktif, foto_berkas) 
+                                        VALUES (:no_reg,:nik, :no_kk, :blok, :no_rumah, :rt, :rw, :tgl_lahir, :tempat_lahir, :jenis_kelamin, :nama, :status_menetap, :stats_dalam_keluarga, :keterangan_aktif, :foto_berkas)");
 
+        $stmt_insert->bindParam(":no_reg", $no_reg);
         $stmt_insert->bindParam(":nik", $row['nik']);
         $stmt_insert->bindParam(":no_kk", $row['no_kk']);
         $stmt_insert->bindParam(":blok", $row['blok']);

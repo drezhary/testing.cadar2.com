@@ -116,10 +116,11 @@ $result = $conn->query("SELECT * FROM anggota_pending WHERE status_approve = 'Pe
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <form action="includes/approve.php?id=<?= $row['id']; ?>" method="POST">
-                                                    <div class="modal-body">
+                                                <input type="hidden" name="id" value="<?= $row['id']; ?>">    
+                                                <div class="modal-body">
                                                         <div class="mb-3">
                                                             <label for="kode_registrasi" class="form-label">Nomor Registrasi:</label>
-                                                            <input type="text" name="kode_registrasi" id="kode_registrasi" class="form-control" required>
+                                                            <input type="text" name="no_reg" id="no_reg" class="form-control" required>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
