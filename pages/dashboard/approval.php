@@ -101,10 +101,10 @@ $result = $conn->query("SELECT * FROM anggota_pending WHERE status_approve = 'Pe
                                 <td><?= $row['no_kk']; ?></td>
                                 <td><?= $row['stats_dalam_keluarga']; ?></td>
                                 <td>
-                                    <img src="../../dashboard/uploads/<?= $row['foto_berkas']; ?>" alt="Berkas" width="100">
+                                    <img src="../uploads/<?= $row['foto_berkas']; ?>" alt="Berkas" width="100">
                                 </td>
                                 <td>
-                                    <a href="../includes/approve.php?id=<?= $row['id']; ?>" class="btn btn-success btn-sm">Approve</a>
+                                    <a href="includes/approve.php?id=<?= $row['id']; ?>" class="btn btn-success btn-sm">Approve</a>
                                     <a href="../includes/reject.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#rejectModal<?= $row['id']; ?>">Reject</a>
                                     <!-- Modal Pop-up untuk mengisi alasan reject -->
                                     <div class="modal fade" id="rejectModal<?= $row['id']; ?>" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">

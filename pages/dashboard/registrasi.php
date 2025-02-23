@@ -2,6 +2,7 @@
 // index.php
 include '../../config/database.php';
 include '../../includes/sidebar.php';
+require_once '../../config/config.php';
 
 $conn = connectDatabase();
 
@@ -81,7 +82,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Eksekusi query
     if ($stmt->rowCount() > 0) {
         // Jika berhasil, redirect ke halaman sukses
-        header("Location: sukses.php?message=Data berhasil disimpan!");
+        echo "<script>
+            alert('Data berhasil diregistrasi. Menunggu persetujuan admin.');
+            window.location.href = 'registrasi.php';
+          </script>";
         exit;
     } else {
         // Jika gagal, tampilkan pesan error
