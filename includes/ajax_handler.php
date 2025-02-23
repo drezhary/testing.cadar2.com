@@ -3,7 +3,7 @@ require_once 'functions.php';
 
 if (isset($_GET['search'])) {
     // Panggil fungsi getData dengan parameter pencarian
-    $result = getData('anggota_keluarga');
+    $result = getData('anggota');
 
     if (isset($result['message'])) {
         echo "<p>" . $result['message'] . "</p>";

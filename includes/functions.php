@@ -3,19 +3,18 @@ require_once __DIR__ . '/../config/database.php';
 function getData($tableName)
 {
     $conn = connectDatabase();
-    $limit = 25;
+    $limit = 30;
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $start = ($page > 1) ? ($page * $limit) - $limit : 0;
     $search = isset($_GET['search']) ? $_GET['search'] : '';
 
     if ($conn) {
         // Hitung total data
-        $queryhitung = "SELECT COUNT(*) as total FROM anggota WHERE no_reg IS NOT NULL AND no_reg != ''";
-
+        //$queryhitung = "SELECT COUNT(*) as total FROM anggota WHERE no_reg IS NOT NULL AND no_reg != ''";
+        $queryhitung = "SELECT COUNT(*) as total FROM anggota";
         if ($search) {
-            $queryhitung .= " AND nama LIKE :search";
+            $queryhitung .= " WHERE nama LIKE :search";
         }
-
         $stmt = $conn->prepare($queryhitung);
         if ($search) {
             $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
@@ -27,11 +26,12 @@ function getData($tableName)
         $total_pages = ceil($total / $limit);
 
         // Ambil query berdasarkan halaman
-        $query = "SELECT nama, no_reg, blok, no_rumah, rt, rw FROM anggota WHERE no_reg IS NOT NULL and no_reg != ''";
-        //$query = "SELECT nama, no_reg, blok, no_rumah, rt, rw FROM anggota";
+        //$query = "SELECT nama, no_reg, blok, no_rumah, rt, rw FROM anggota WHERE no_reg IS NOT NULL and no_reg != ''";
+        $query = "SELECT nama, no_reg, blok, no_rumah, rt, rw FROM anggota";
 
         if ($search) {
-            $query .= " AND nama LIKE :search";
+            // $query .= " AND nama LIKE :search";
+            $query .= " WHERE nama LIKE :search";
         }
 
         $query .= " ORDER BY no_reg ASC LIMIT :start, :limit;";
