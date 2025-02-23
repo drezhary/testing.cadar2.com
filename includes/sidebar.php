@@ -10,7 +10,7 @@ require_once '../../config/config.php';
             <a href="<?php echo BASE_URL; ?>/pages/dashboard/index.php" class="nav-link text-white active">Beranda</a>
         </li>
         <li class="nav-item">
-            <a href="<?php echo BASE_URL; ?>/public/admin.php" class="nav-link text-white">Data Warga</a>
+            <a href="<?php echo BASE_URL; ?>/pages/dashboard/datawarga.php" class="nav-link text-white">Data Warga</a>
         </li>
         <li class="nav-item">
             <a href="<?php echo BASE_URL; ?>/pages/dashboard/registrasi.php" class="nav-link text-white">Registrasi</a>
